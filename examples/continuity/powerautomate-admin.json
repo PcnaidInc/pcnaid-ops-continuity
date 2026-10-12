@@ -1,0 +1,43 @@
+{
+  "format": "pcnaid-powerautomate-admin-v1",
+  "organization": {
+    "id": "northstar-demo",
+    "name": "Northstar Demo Services \u2014 fictional"
+  },
+  "capturedAt": "2026-10-05T12:00:00.000Z",
+  "flows": [
+    {
+      "id": "flow-demo",
+      "name": "Monthly reporting",
+      "environmentId": "Default-demo",
+      "owners": [
+        {
+          "id": "demo-owner",
+          "name": "Example owner",
+          "kind": "unknown"
+        }
+      ],
+      "ownersComplete": true,
+      "connectionIds": [
+        "connection-demo"
+      ],
+      "connectionsComplete": true,
+      "endpoints": [],
+      "state": "Started",
+      "solutionAware": null
+    }
+  ],
+  "connections": [
+    {
+      "id": "connection-demo",
+      "environmentId": "Default-demo",
+      "name": "Report connection",
+      "owner": null,
+      "status": "unknown",
+      "expiresAt": null
+    }
+  ],
+  "warnings": [
+    "Fictional exporter-shaped fixture; no administrator tenant has been queried."
+  ]
+}

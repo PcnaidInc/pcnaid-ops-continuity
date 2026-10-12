@@ -1,0 +1,18 @@
+{
+  "name": "@pcnaid/ops-continuity",
+  "version": "0.1.0",
+  "description": "Local-first automation continuity assessment, workflow and connection ownership handoff analysis.",
+  "type": "module",
+  "engines": {
+    "node": ">=22.16.0"
+  },
+  "scripts": {
+    "test": "node scripts/test.mjs",
+    "check": "node scripts/check.mjs",
+    "demo": "node scripts/demo.mjs"
+  },
+  "bin": {
+    "pcnaid-continuity": "bin/pcnaid-continuity.mjs"
+  },
+  "license": "Apache-2.0"
+}

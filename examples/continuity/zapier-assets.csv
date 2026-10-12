@@ -1,0 +1,3 @@
+Type,ID,Name,Link,Status,App
+Zap,12345,Inbound lead routing,https://zapier.com/editor/12345,Private,Webhooks by Zapier
+Auth,67890,CRM account,https://zapier.com/app/connections,Private,CRM

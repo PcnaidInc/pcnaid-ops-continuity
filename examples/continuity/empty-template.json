@@ -1,0 +1,24 @@
+{
+  "version": "1",
+  "organization": {
+    "id": "replace-with-client-id",
+    "name": "Replace with client name"
+  },
+  "capturedAt": "2026-10-05T12:00:00.000Z",
+  "sources": [
+    {
+      "id": "manual-1",
+      "type": "manual",
+      "label": "Customer supplied inventory",
+      "collectedAt": "2026-10-05T12:00:00.000Z",
+      "sha256": null,
+      "coverage": "unknown"
+    }
+  ],
+  "principals": [],
+  "connections": [],
+  "workflows": [],
+  "warnings": [
+    "Empty template: add actual records; an empty assessment is not evidence of a complete inventory."
+  ]
+}

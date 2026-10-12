@@ -1,0 +1,290 @@
+{
+  "version": "1",
+  "organization": {
+    "id": "northstar-demo",
+    "name": "Northstar Demo Services \u2014 fictional"
+  },
+  "capturedAt": "2026-10-05T12:00:00.000Z",
+  "sources": [
+    {
+      "id": "demo-register",
+      "type": "manual",
+      "label": "Fictional administrator-verified demonstration register",
+      "collectedAt": "2026-10-05T12:00:00.000Z",
+      "sha256": null,
+      "coverage": "complete"
+    }
+  ],
+  "principals": [
+    {
+      "id": "person:alex",
+      "name": "Alex Chen",
+      "kind": "person",
+      "status": "departing",
+      "sourceId": "demo-register"
+    },
+    {
+      "id": "person:sam",
+      "name": "Sam Rivera",
+      "kind": "person",
+      "status": "active",
+      "sourceId": "demo-register"
+    },
+    {
+      "id": "service:finance",
+      "name": "Finance service identity",
+      "kind": "service",
+      "status": "active",
+      "sourceId": "demo-register"
+    },
+    {
+      "id": "service:operations",
+      "name": "Operations service identity",
+      "kind": "service",
+      "status": "active",
+      "sourceId": "demo-register"
+    },
+    {
+      "id": "person:unknown",
+      "name": "Former consultant",
+      "kind": "person",
+      "status": "unknown",
+      "sourceId": "demo-register"
+    }
+  ],
+  "connections": [
+    {
+      "id": "conn:crm",
+      "platform": "zapier",
+      "name": "CRM connection",
+      "ownerId": "service:operations",
+      "binding": "organization",
+      "status": "connected",
+      "expiresAt": null,
+      "sourceId": "demo-register"
+    },
+    {
+      "id": "conn:finance",
+      "platform": "powerautomate",
+      "name": "Finance connector",
+      "ownerId": "service:finance",
+      "binding": "organization",
+      "status": "connected",
+      "expiresAt": null,
+      "sourceId": "demo-register"
+    },
+    {
+      "id": "conn:ops",
+      "platform": "powerautomate",
+      "name": "Operations connector",
+      "ownerId": "service:operations",
+      "binding": "organization",
+      "status": "connected",
+      "expiresAt": null,
+      "sourceId": "demo-register"
+    },
+    {
+      "id": "conn:legacy",
+      "platform": "zapier",
+      "name": "Legacy account connection",
+      "ownerId": "person:unknown",
+      "binding": "unknown",
+      "status": "unknown",
+      "expiresAt": null,
+      "sourceId": "demo-register"
+    },
+    {
+      "id": "conn:expiry",
+      "platform": "powerautomate",
+      "name": "Supplier export connection",
+      "ownerId": "person:sam",
+      "binding": "person",
+      "status": "connected",
+      "expiresAt": "2026-10-15T12:00:00.000Z",
+      "sourceId": "demo-register"
+    }
+  ],
+  "workflows": [
+    {
+      "id": "flow:daily",
+      "platform": "powerautomate",
+      "name": "Daily operations digest",
+      "ownerIds": [
+        "service:operations"
+      ],
+      "businessOwner": "Operations",
+      "purpose": "Distribute the daily operations summary.",
+      "connectionIds": [
+        "conn:ops"
+      ],
+      "dependsOnWorkflowIds": [],
+      "endpoints": [],
+      "state": "enabled",
+      "coverage": {
+        "owners": "complete",
+        "connections": "complete",
+        "endpoints": "complete",
+        "upstream": "complete"
+      },
+      "solutionAware": true,
+      "sourceId": "demo-register"
+    },
+    {
+      "id": "zap:lead",
+      "platform": "zapier",
+      "name": "Inbound lead routing",
+      "ownerIds": [
+        "person:sam"
+      ],
+      "businessOwner": "Sales",
+      "purpose": "Route web leads to the CRM.",
+      "connectionIds": [
+        "conn:crm"
+      ],
+      "dependsOnWorkflowIds": [],
+      "endpoints": [
+        {
+          "id": "webhook:lead",
+          "label": "External website intake",
+          "kind": "http",
+          "transferChangesUrl": false,
+          "reference": "https://hooks.zapier.com/[path-redacted]"
+        }
+      ],
+      "state": "enabled",
+      "coverage": {
+        "owners": "complete",
+        "connections": "complete",
+        "endpoints": "complete",
+        "upstream": "complete"
+      },
+      "solutionAware": null,
+      "sourceId": "demo-register"
+    },
+    {
+      "id": "flow:finance",
+      "platform": "powerautomate",
+      "name": "Finance reconciliation",
+      "ownerIds": [
+        "service:finance"
+      ],
+      "businessOwner": "Finance",
+      "purpose": "Reconcile approved invoices.",
+      "connectionIds": [
+        "conn:finance"
+      ],
+      "dependsOnWorkflowIds": [],
+      "endpoints": [],
+      "state": "enabled",
+      "coverage": {
+        "owners": "complete",
+        "connections": "complete",
+        "endpoints": "complete",
+        "upstream": "complete"
+      },
+      "solutionAware": true,
+      "sourceId": "demo-register"
+    },
+    {
+      "id": "zap:legacy",
+      "platform": "zapier",
+      "name": "Legacy consultant automation",
+      "ownerIds": [
+        "person:unknown"
+      ],
+      "businessOwner": null,
+      "purpose": null,
+      "connectionIds": [
+        "conn:legacy"
+      ],
+      "dependsOnWorkflowIds": [],
+      "endpoints": [],
+      "state": "unknown",
+      "coverage": {
+        "owners": "partial",
+        "connections": "partial",
+        "endpoints": "unknown",
+        "upstream": "unknown"
+      },
+      "solutionAware": null,
+      "sourceId": "demo-register"
+    },
+    {
+      "id": "flow:supplier",
+      "platform": "powerautomate",
+      "name": "Supplier order export",
+      "ownerIds": [
+        "person:sam"
+      ],
+      "businessOwner": "Procurement",
+      "purpose": "Export approved supplier orders.",
+      "connectionIds": [
+        "conn:expiry"
+      ],
+      "dependsOnWorkflowIds": [],
+      "endpoints": [],
+      "state": "enabled",
+      "coverage": {
+        "owners": "complete",
+        "connections": "complete",
+        "endpoints": "complete",
+        "upstream": "complete"
+      },
+      "solutionAware": true,
+      "sourceId": "demo-register"
+    },
+    {
+      "id": "flow:downstream",
+      "platform": "powerautomate",
+      "name": "Sales summary downstream",
+      "ownerIds": [
+        "service:operations"
+      ],
+      "businessOwner": "Operations",
+      "purpose": "Distribute the daily operations summary.",
+      "connectionIds": [
+        "conn:ops"
+      ],
+      "dependsOnWorkflowIds": [
+        "zap:lead"
+      ],
+      "endpoints": [],
+      "state": "enabled",
+      "coverage": {
+        "owners": "complete",
+        "connections": "complete",
+        "endpoints": "complete",
+        "upstream": "complete"
+      },
+      "solutionAware": true,
+      "sourceId": "demo-register"
+    },
+    {
+      "id": "flow:notes",
+      "platform": "powerautomate",
+      "name": "Weekly service dashboard",
+      "ownerIds": [
+        "service:operations"
+      ],
+      "businessOwner": null,
+      "purpose": null,
+      "connectionIds": [
+        "conn:ops"
+      ],
+      "dependsOnWorkflowIds": [],
+      "endpoints": [],
+      "state": "enabled",
+      "coverage": {
+        "owners": "complete",
+        "connections": "complete",
+        "endpoints": "complete",
+        "upstream": "complete"
+      },
+      "solutionAware": true,
+      "sourceId": "demo-register"
+    }
+  ],
+  "warnings": [
+    "All names, workflows, connections, and results in this example are fictional. No customer account was queried."
+  ]
+}

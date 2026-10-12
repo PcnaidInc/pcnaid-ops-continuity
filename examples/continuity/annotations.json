@@ -1,0 +1,7 @@
+[
+  {
+    "workflowId": "flow:notes",
+    "businessOwner": "Customer Success",
+    "purpose": "Publish the weekly service-health summary."
+  }
+]
